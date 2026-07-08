@@ -27,6 +27,11 @@ jobs:
           go vet ./...
           go build ./...
 
+      # Checks dependencies against the Go vulnerability database,
+      # reporting only vulnerabilities in code paths we actually call.
+      - name: Vulnerability scan
+        run: go run golang.org/x/vuln/cmd/govulncheck@latest ./...
+
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
