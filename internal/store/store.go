@@ -31,14 +31,14 @@ func Open(ctx context.Context, dsn string) (*Store, error) {
 		return nil, err
 	}
 	if _, err := conn.Exec(ctx, schema); err != nil {
-		conn.Close(ctx)
+		_ = conn.Close(ctx)
 		return nil, fmt.Errorf("apply schema: %w", err)
 	}
 	return &Store{conn: conn}, nil
 }
 
 func (s *Store) Close(ctx context.Context) {
-	s.conn.Close(ctx)
+	_ = s.conn.Close(ctx)
 }
 
 // InsertEvents stores events, silently skipping IDs that already exist:
@@ -60,7 +60,7 @@ func (s *Store) InsertEvents(ctx context.Context, events []github.Event) (int64,
 	}
 
 	results := s.conn.SendBatch(ctx, batch)
-	defer results.Close()
+	defer func() { _ = results.Close() }()
 
 	var inserted int64
 	for range events {

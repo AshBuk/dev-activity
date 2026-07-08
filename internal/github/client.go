@@ -78,7 +78,7 @@ func (c *Client) fetchPage(ctx context.Context, url string) ([]Event, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
 		// Include a bit of the body: GitHub explains rate limits there.
