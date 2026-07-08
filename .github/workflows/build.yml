@@ -1,0 +1,43 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+
+env:
+  IMAGE: ghcr.io/ashbuk/dev-activity
+
+# GITHUB_TOKEN needs packages:write to push to ghcr.io.
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Vet and build
+        run: |
+          go vet ./...
+          go build ./...
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          # :latest for the cluster, :sha for traceability/rollback.
+          tags: |
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:${{ github.sha }}
