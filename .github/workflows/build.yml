@@ -22,10 +22,11 @@ jobs:
         with:
           go-version-file: go.mod
 
-      - name: Vet and build
-        run: |
-          go vet ./...
-          go build ./...
+      - name: Lint
+        uses: golangci/golangci-lint-action@v7
+
+      - name: Build
+        run: go build ./...
 
       # Checks dependencies against the Go vulnerability database,
       # reporting only vulnerabilities in code paths we actually call.
