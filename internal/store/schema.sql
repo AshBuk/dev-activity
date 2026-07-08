@@ -1,3 +1,6 @@
+-- Copyright (c) 2026 Asher Buk
+-- SPDX-License-Identifier: MIT
+
 -- Append-only log of GitHub events. Aggregates (commits per day, streak)
 -- are computed at read time with SQL, e.g. from Grafana.
 CREATE TABLE IF NOT EXISTS github_events (

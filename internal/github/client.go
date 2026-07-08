@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Asher Buk
+// SPDX-License-Identifier: MIT
+
 // Package github fetches user activity from the GitHub REST API.
 package github
 

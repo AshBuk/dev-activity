@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Asher Buk
+# SPDX-License-Identifier: MIT
+
 # Build stage: static binary, no CGO — runnable in a distroless image.
 FROM golang:1.26-alpine AS build
 WORKDIR /src

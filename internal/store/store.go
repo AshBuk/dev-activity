@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Asher Buk
+// SPDX-License-Identifier: MIT
+
 // Package store persists GitHub events in PostgreSQL.
 package store
 

@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Asher Buk
+// SPDX-License-Identifier: MIT
+
 // dev-activity is a one-shot collector: it fetches recent GitHub activity
 // for a user and stores it in PostgreSQL, then exits. It is designed to run
 // as a Kubernetes CronJob (no daemon, no HTTP server).
