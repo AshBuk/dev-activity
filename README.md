@@ -16,7 +16,7 @@ Grafana reads the data straight from PostgreSQL.
   and applied on every run; inserts are `ON CONFLICT DO NOTHING`. Running
   the job twice is safe.
 
-The events API keeps at most 300 events / 90 days of history — regular
+The events API keeps at most 300 events / 30 days of history — regular
 polling is what builds the long-term record.
 
 ## Configuration
